@@ -7,8 +7,8 @@ products.each do |product|
     pages << {
         title: title,
         url: url,
-        page_type: 'products'
-    }
+        page_type: 'products'}
+        
 end
 
 pagination = nokogiri.css("ul.pagination li a")
