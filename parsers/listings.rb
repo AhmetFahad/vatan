@@ -2,8 +2,8 @@ nokogiri = Nokogiri.HTML(content)
 products = nokogiri.css(".product-list.product-list--list-page")
 
 
-products.each do|product|
-    url = 'https://vatanbilgisayar.com/'+product.at_css('.product-list__link').attr('href')
+products.each do |product|
+    url = 'https://vatanbilgisayar.com/bilgisayar/'+product.at_css('.product-list__link').attr('href')
     
     pages << {
         url: url,
@@ -15,7 +15,7 @@ end
 
 pagination_links = nokogiri.css('a.pagination__content')
 pagination_links.each do |link|
-  url = 'https://vatanbilgisayar.com/'+link.attr('href')
+  url = 'https://vatanbilgisayar.com/bilgisayar/'+link.attr('href')
   pages << {
       url: url,
       page_type: 'listings',
