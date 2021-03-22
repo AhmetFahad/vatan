@@ -1,23 +1,25 @@
 nokogiri = Nokogiri.HTML(content)
 products = nokogiri.css(".product-list.product-list--list-page")
-products.each do |pro|
 
-    product = {}
-    product['title'] = pro.css(".product-list__product-name")
-    product['url'] = "https://www.vatanbilgisayar.com/"+pro.css(".product-list__link").attr("href")
-    product['price'] = pro.css('.product-list__price')
-    product['code'] = pro.css('.product-list__product-code')
-    rank = pro.css('.rank-star .score').attr("style")
-    product['rate'] = rank ? rank.gsub("width: ","") : nil
-    product['price'] = pro.css('.comment-count')
 
-    outputs << product
+products.each do|product|
+    url = 'https://vatanbilgisayar.com/'+product.at_css('.product-list__link').attr('href')
+    
     pages << {
-        url: product['url'],
-        page_type: 'details',
-        vars: { 
-            title: product['title'],
-            price: product['price']
-        }}
+        url: url,
+        page_type: 'products',
+        fetch_type: 'browser',
+        vars: {}
+        }
+end
 
+pagination_links = nokogiri.css('a.pagination__content')
+pagination_links.each do |link|
+  url = 'https://vatanbilgisayar.com/'+link.attr('href')
+  pages << {
+      url: url,
+      page_type: 'listings',
+      fetch_type: 'browser',
+      vars: {}
+    }
 end

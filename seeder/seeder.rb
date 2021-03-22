@@ -3,5 +3,4 @@ pages << {
     method: "GET",
     url: "https://www.vatanbilgisayar.com/bilgisayar",
     fetch_type: "browser",
-    force_fetch: true
 }
