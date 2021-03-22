@@ -7,7 +7,7 @@ products.each do |pro|
     product['url'] = "https://www.vatanbilgisayar.com/"+pro.css(".product-list__link").attr("href")
     product['price'] = pro.css('.product-list__price')
     product['code'] = pro.css('.product-list__product-code')
-    rank = nokogiri.css('.rank-star .score').attr("style")
+    rank = pro.css('.rank-star .score').attr("style")
     product['rate'] = rank ? rank.gsub("width: ","") : nil
     product['price'] = pro.css('.comment-count')
 
