@@ -3,7 +3,7 @@ products = nokogiri.css(".product-list.product-list--list-page")
 products.each do |pro|
 
     product = {}
-    product['title'] = pro.css(".product-list__product-name").text
+    product['title'] = pro.css(".product-list__product-name")
     product['url'] = "https://www.vatanbilgisayar.com/"+pro.css(".product-list__link").attr("href")
     product['price'] = pro.css('.product-list__price')
     product['code'] = pro.css('.product-list__product-code')
