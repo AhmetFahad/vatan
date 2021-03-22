@@ -1,21 +1,23 @@
 nokogiri = Nokogiri.HTML(content)
-products = nokogiri.css(".product-list")
-products.each do |product|
+products = nokogiri.css(".product-list.product-list--list-page")
+products.each do |pro|
 
-    title = product.css(".product-list__product-name").attr("src")
-    url = "https://www.vatanbilgisayar.com/"+product.css(".product-list__content a").attr("href").txt
+    product = {}
+    product['title'] = pro.css(".product-list__product-name").text
+    product['url'] = "https://www.vatanbilgisayar.com/"+pro.css(".product-list__link").attr("href")
+    product['price'] = nokogiri.css('.product-list__price')
+    product['code'] = nokogiri.css('.product-list__product-code')
+    rank = nokogiri.css('.rank-star .score').attr("style")
+    product['rate'] = rank ? rank.gsub("width: ","") : nil
+    product['price'] = nokogiri.css('.comment-count')
+
+    outputs << product
     pages << {
-        title: title,
-        url: url,
-        page_type: 'products'}
+        url: product['url'],
+        page_type: 'details',
+        vars: { 
+            title: product['title'],
+            price: product['price']
+        }}
         
 end
-
-pagination = nokogiri.css("ul.pagination li a")
-pagination.each do |pag|
-    pages << {
-        url: "https://www.vatanbilgisayar.com/"+pag.attr("href"),
-        page_type: 'listings'
-    }
-
-end    
